@@ -1,0 +1,52 @@
+Collecting fastapi==0.115.0
+  Downloading fastapi-0.115.0-py3-none-any.whl (94 kB)
+     ---------------------------------------- 94.6/94.6 kB 2.7 MB/s eta 0:00:00
+Collecting uvicorn==0.34.0
+  Downloading uvicorn-0.34.0-py3-none-any.whl (62 kB)
+     ---------------------------------------- 62.3/62.3 kB ? eta 0:00:00
+Requirement already satisfied: PyPDF2==3.0.1 in c:\users\om sai ram\lib\site-packages (3.0.1)
+Requirement already satisfied: groq in c:\users\om sai ram\lib\site-packages (1.2.0)
+Collecting python-dotenv==1.0.1
+  Using cached python_dotenv-1.0.1-py3-none-any.whl (19 kB)
+Collecting python-multipart==0.0.9
+  Using cached python_multipart-0.0.9-py3-none-any.whl (22 kB)
+Requirement already satisfied: pydantic in c:\users\om sai ram\lib\site-packages (2.13.3)
+Collecting starlette<0.39.0,>=0.37.2
+  Downloading starlette-0.38.6-py3-none-any.whl (71 kB)
+     ---------------------------------------- 71.5/71.5 kB 3.8 MB/s eta 0:00:00
+Requirement already satisfied: typing-extensions>=4.8.0 in c:\users\om sai ram\lib\site-packages (from fastapi==0.115.0) (4.15.0)
+Requirement already satisfied: click>=7.0 in c:\users\om sai ram\lib\site-packages (from uvicorn==0.34.0) (8.3.2)
+Requirement already satisfied: h11>=0.8 in c:\users\om sai ram\lib\site-packages (from uvicorn==0.34.0) (0.16.0)
+Requirement already satisfied: anyio<5,>=3.5.0 in c:\users\om sai ram\lib\site-packages (from groq) (4.13.0)
+Requirement already satisfied: distro<2,>=1.7.0 in c:\users\om sai ram\lib\site-packages (from groq) (1.9.0)
+Requirement already satisfied: httpx<1,>=0.23.0 in c:\users\om sai ram\lib\site-packages (from groq) (0.28.1)
+Requirement already satisfied: sniffio in c:\users\om sai ram\lib\site-packages (from groq) (1.3.1)
+Requirement already satisfied: annotated-types>=0.6.0 in c:\users\om sai ram\lib\site-packages (from pydantic) (0.7.0)
+Requirement already satisfied: pydantic-core==2.46.3 in c:\users\om sai ram\lib\site-packages (from pydantic) (2.46.3)
+Requirement already satisfied: typing-inspection>=0.4.2 in c:\users\om sai ram\lib\site-packages (from pydantic) (0.4.2)
+Requirement already satisfied: idna>=2.8 in c:\users\om sai ram\lib\site-packages (from anyio<5,>=3.5.0->groq) (3.11)
+Requirement already satisfied: colorama in c:\users\om sai ram\lib\site-packages (from click>=7.0->uvicorn==0.34.0) (0.4.6)
+Requirement already satisfied: certifi in c:\users\om sai ram\lib\site-packages (from httpx<1,>=0.23.0->groq) (2026.2.25)
+Requirement already satisfied: httpcore==1.* in c:\users\om sai ram\lib\site-packages (from httpx<1,>=0.23.0->groq) (1.0.9)
+Installing collected packages: python-multipart, python-dotenv, uvicorn, starlette, fastapi
+  Attempting uninstall: python-multipart
+    Found existing installation: python-multipart 0.0.29
+    Uninstalling python-multipart-0.0.29:
+      Successfully uninstalled python-multipart-0.0.29
+  Attempting uninstall: python-dotenv
+    Found existing installation: python-dotenv 1.2.2
+    Uninstalling python-dotenv-1.2.2:
+      Successfully uninstalled python-dotenv-1.2.2
+  Attempting uninstall: uvicorn
+    Found existing installation: uvicorn 0.47.0
+    Uninstalling uvicorn-0.47.0:
+      Successfully uninstalled uvicorn-0.47.0
+  Attempting uninstall: starlette
+    Found existing installation: starlette 1.2.0
+    Uninstalling starlette-1.2.0:
+      Successfully uninstalled starlette-1.2.0
+  Attempting uninstall: fastapi
+    Found existing installation: fastapi 0.136.3
+    Uninstalling fastapi-0.136.3:
+      Successfully uninstalled fastapi-0.136.3
+Successfully installed fastapi-0.115.0 python-dotenv-1.0.1 python-multipart-0.0.9 starlette-0.38.6 uvicorn-0.34.0
