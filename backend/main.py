@@ -2,6 +2,7 @@
 Resume ATS Score Checker API
 """
 import logging
+import os
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -14,7 +15,12 @@ logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
 )
 
-app = FastAPI(title="Resume ATS Score Checker API")
+is_vercel = os.environ.get("VERCEL") == "1"
+
+app = FastAPI(
+    title="Resume ATS Score Checker API",
+    root_path="/_/backend" if is_vercel else "",
+)
 
 app.add_middleware(
     CORSMiddleware,
