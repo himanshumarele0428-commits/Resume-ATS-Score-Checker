@@ -20,6 +20,7 @@ is_vercel = os.environ.get("VERCEL") == "1"
 app = FastAPI(
     title="Resume ATS Score Checker API",
     root_path="/_/backend" if is_vercel else "",
+    redirect_slashes=False,
 )
 
 app.add_middleware(
