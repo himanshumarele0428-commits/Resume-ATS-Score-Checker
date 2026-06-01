@@ -21,7 +21,9 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const API_URL = 'http://localhost:8001';
+const API_URL = typeof window !== 'undefined' && window.location.hostname === 'localhost'
+  ? 'http://localhost:8001'
+  : '/api';
 
 const SCORE_ICONS = {
   overall: Target,
