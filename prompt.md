@@ -113,3 +113,40 @@ def _clean_json_response(self, raw: str) -> str:
 - **Prompt definition:** `backend/services/ats_service.py` → `ATS_PROMPT_TEMPLATE`
 - **Groq call:** `backend/services/ats_service.py` → `_call_groq()`
 - **Response parsing:** `backend/services/ats_service.py` → `_clean_json_response()` + `analyze()`
+
+
+
+Prompt2: 
+
+e:\Antigravity\Project1_Basics\Project29_ResumeATSChecker I want you  
+  to create an application with the name of "Resume ATS Score
+  Checker".You can use a backend as Python and a frontend as a react    
+  We have to provide an option to upload Put the PDF file and also you  
+   have to provide the option as text field to provide the job details  
+You are an analytical the below task ## Role
+  expert with strong research capabilities, skilled in data
+  interpretation, pattern recognition, and delivering actionable        
+Analyze the attached resume: Attached
+  PramodResume.pdf and the JobDescription, Provide a detailed review    
+  in the following format:\n\n" "1. Overall Result: [Score out of       
+  10]\n" "2. Effectivity: [Score out of 10] with feedback on how        
+  effectively the resume presents the applicant's skills and
+  experiences.\n" "3. Layout and Design: [Score out of 10] with
+  comments on the visual appeal and organization of the resume.\n" "4.  
+   Content Relevance: [Score out of 10] with insights on the relevance  
+   and adequacy of the information provided.\n" "5. Grammar and
+  Syntax: [Score out of 10] with observations on the language quality   
+  and readability.\n" "6. Impact: [Score out of 10] with thoughts on    
+  how the resume stands out or catches attention.\n\n" "Use symbols     
+## Key ✅ for positive aspects and 🙈 for areas of improvement.
+1. Please analyze the keywords descriptions
+2. We need to check. Youon with the resume.
+  have to act as an ATS, which is Applicant Tracking System or
+  Application Tracking System, which basically checks for t those       
+  keywords. So we need to make sure that theshe keywords and
+3. The fullons in your resume. So yoe are available.
+## Expectedhave already given you in the instructions.
+Please provide a thorough analysis with key findings,
+u insights, and recommendations. Use data to support conclusions.       
+  need to make sure that our resume is not missing 
+──────────────────────────────────────────────────────────
