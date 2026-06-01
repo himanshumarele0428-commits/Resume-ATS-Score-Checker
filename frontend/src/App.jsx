@@ -23,7 +23,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const API_URL = typeof window !== 'undefined' && window.location.hostname === 'localhost'
   ? 'http://localhost:8001'
-  : '/api';
+  : '/_/backend';
 
 const SCORE_ICONS = {
   overall: Target,
