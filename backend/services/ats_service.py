@@ -21,7 +21,6 @@ Perform a thorough ATS analysis and return your response as valid JSON only (no 
 
 {{
   "scores": {{
-    "overall": {{"score": "0-10", "label": "Overall Result"}},
     "effectivity": {{"score": "0-10", "label": "Effectivity"}},
     "layout_design": {{"score": "0-10", "label": "Layout & Design"}},
     "content_relevance": {{"score": "0-10", "label": "Content Relevance"}},
@@ -37,7 +36,6 @@ Perform a thorough ATS analysis and return your response as valid JSON only (no 
     "strengths": ["✅ strength 1", "✅ strength 2"],
     "improvements": ["🙈 improvement 1", "🙈 improvement 2"]
   }},
-  "ats_readability_score": 0,
   "summary": "<2-3 sentence overall assessment>"
 }}
 
@@ -45,7 +43,6 @@ Rules:
 - Score each dimension honestly on a scale of 0-10 where 0=terrible and 10=perfect.
 - For strengths, prefix each item with ✅. For improvements, prefix each item with 🙈.
 - Extract key technical skills, tools, and qualifications from the JD and check which appear in the resume.
-- ats_readability_score (0-100) reflects how well the resume would parse in an actual ATS system. Consider formatting clarity, standard section headings, keyword placement, and absence of complex tables/images that confuse parsers.
 - The "layout_design" score refers to visual appeal, organization, readability for human recruiters.
 - Return ONLY the JSON object, nothing else. No markdown fences, no explanation."""
 
@@ -106,6 +103,13 @@ class ATSService:
             elif isinstance(score_val, (int, float)):
                 scores[key]["score"] = float(score_val)
 
+        sub_scores = [scores[k]["score"] for k in scores if k != "overall"]
+        if sub_scores:
+            overall = round(sum(sub_scores) / len(sub_scores), 1)
+        else:
+            overall = 0
+        scores["overall"] = {"score": overall, "label": "Overall Result"}
+
         kw = result.get("keyword_analysis", {})
         match_pct = kw.get("match_percentage")
         if isinstance(match_pct, str):
@@ -124,5 +128,14 @@ class ATSService:
                 result["ats_readability_score"] = 0
         elif isinstance(readability, (int, float)):
             result["ats_readability_score"] = float(readability)
+
+        keyword_match = kw.get("match_percentage", 0)
+        layout_score = scores.get("layout_design", {}).get("score", 0)
+        content_score = scores.get("content_relevance", {}).get("score", 0)
+        ats_readability = round(
+            (layout_score * 4.0) + (content_score * 3.0) + (keyword_match * 0.3)
+        )
+        ats_readability = max(0, min(100, ats_readability))
+        result["ats_readability_score"] = ats_readability
 
         return result

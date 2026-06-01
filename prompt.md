@@ -19,7 +19,6 @@ Perform a thorough ATS analysis and return your response as valid JSON only (no 
 
 {
   "scores": {
-    "overall": {"score": "0-10", "label": "Overall Result"},
     "effectivity": {"score": "0-10", "label": "Effectivity"},
     "layout_design": {"score": "0-10", "label": "Layout & Design"},
     "content_relevance": {"score": "0-10", "label": "Content Relevance"},
@@ -35,7 +34,6 @@ Perform a thorough ATS analysis and return your response as valid JSON only (no 
     "strengths": ["✅ strength 1", "✅ strength 2"],
     "improvements": ["🙈 improvement 1", "🙈 improvement 2"]
   },
-  "ats_readability_score": 0,
   "summary": "<2-3 sentence overall assessment>"
 }
 
@@ -43,7 +41,6 @@ Rules:
 - Score each dimension honestly on a scale of 0-10 where 0=terrible and 10=perfect.
 - For strengths, prefix each item with ✅. For improvements, prefix each item with 🙈.
 - Extract key technical skills, tools, and qualifications from the JD and check which appear in the resume.
-- ats_readability_score (0-100) reflects how well the resume would parse in an actual ATS system. Consider formatting clarity, standard section headings, keyword placement, and absence of complex tables/images that confuse parsers.
 - The "layout_design" score refers to visual appeal, organization, readability for human recruiters.
 - Return ONLY the JSON object, nothing else. No markdown fences, no explanation.
 ```
@@ -63,10 +60,11 @@ Rules:
 
 ## 3. Expected Response Format
 
+The LLM returns 5 dimension scores. The backend computes `overall` as the average.
+
 ```json
 {
   "scores": {
-    "overall": { "score": 7.5, "label": "Overall Result" },
     "effectivity": { "score": 8.0, "label": "Effectivity" },
     "layout_design": { "score": 6.0, "label": "Layout & Design" },
     "content_relevance": { "score": 7.0, "label": "Content Relevance" },
@@ -88,14 +86,24 @@ Rules:
       "🙈 Consider adding a professional summary at the top"
     ]
   },
-  "ats_readability_score": 75,
   "summary": "The resume demonstrates solid technical experience but could better align with the specific keywords from the job description. Improving keyword density and adding missing skills would significantly boost ATS compatibility."
 }
 ```
 
 ---
 
-## 4. Response Cleaning (Post-Processing)
+## 4. Backend-Computed Values
+
+These values are NOT returned by the LLM. They are calculated from the LLM's scores:
+
+| Value                   | Formula                                              |
+|-------------------------|------------------------------------------------------|
+| **Overall Score**       | Average of all 5 sub-scores                          |
+| **ATS Readability Score** | `(layout_design × 4) + (content_relevance × 3) + (keyword_match% × 0.3)` — clamped to 0-100 |
+
+---
+
+## 5. Response Cleaning (Post-Processing)
 
 The raw LLM response is cleaned before JSON parsing:
 
